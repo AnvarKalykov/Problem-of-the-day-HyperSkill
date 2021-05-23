@@ -1,6 +1,6 @@
 /*
 Write a method with the name sign that takes an int number and checks whether the number is negative,
-positive or zero. The method should return -1, +1 or 0 respectively.
+ positive or zero. The method should return -1, +1 or 0 respectively.
  */
 
 
