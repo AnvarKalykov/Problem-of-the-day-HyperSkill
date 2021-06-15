@@ -21,72 +21,39 @@ C can be placed before D (500) and M (1000) to make 400 and 900.
 Given a roman numeral, convert it to an integer.
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RomanInteger {
     public int romanToInt(String s) {
-        char prev;
-        char curr = ' ';
-        int num = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (i != 0) {
-                prev = curr;
-                curr = s.charAt(i);
-            }
-            else {
-                curr = s.charAt(i);
-                prev = ' ';
-            }
-            if (curr == 'L') {
-                if (prev == 'X') {
-                    num = num + 30;
-                }
-                else {
-                    num = num + 50;
-                }
-            }
-            else if (curr == 'C') {
-                if (prev == 'X') {
-                    num = num + 80;
-                }
-                else {
-                    num = num + 100;
-                }
-            }
-            else if (curr == 'V') {
-                if (prev == 'I') {
-                    num = num + 3;
-                }
-                else {
-                    num = num + 5;
-                }
-            }
-            else if (curr == 'X') {
-                if (prev == 'I') {
-                    num = num + 8;
-                }
-                else {
-                    num = num + 10;
-                }
-            }
-            else if (curr == 'D') {
-                if (prev == 'C') {
-                    num = num + 300;
-                }
-                else {
-                    num = num + 500;
-                }
-            }
-            else if (curr == 'M') {
-                if (prev == 'C') {
-                    num = num + 800;
-                }
-                else {
-                    num = num + 1000;
-                }
-            }
-            else if (curr == 'I') {
-                num = num + 1;
-            }
+        if (s == null || s.length() == 0) {
+            return 0;
         }
-        return num;
+
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('M', 1000);
+        map.put('D', 500);
+        map.put('C', 100);
+        map.put('L', 50);
+        map.put('X', 10);
+        map.put('V', 5);
+        map.put('I', 1);
+
+        int sum = 0;
+        int prev = map.get(s.charAt(0));
+        int next = 0;
+
+        for (int i = 1; i < s.length(); i++) {
+            next = map.get(s.charAt(i));
+
+            if (prev < next) {
+                sum -= prev;
+            } else {
+                sum += prev;
+            }
+            prev = next;
+        }
+        sum += prev;
+        return sum;
     }
 }
