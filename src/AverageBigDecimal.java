@@ -13,6 +13,7 @@ public class AverageBigDecimal {
 
         BigDecimal result = a.add(b).add(c).divide(three, 0, RoundingMode.DOWN);
 
+
         System.out.println(result.setScale(0, RoundingMode.DOWN));
     }
 }
